@@ -12,9 +12,17 @@
 
 <body>
 	<img src="img/colascradle.png" alt="cola" style="height:600px;">
-	<p>URL: http://test.com/?<span id="params"></span></p>
-	<p><input placeholder="Enter URL params" /></p>
-	<pre id="results">{}</pre>
+	<div class="row">
+		<form id="event">
+		  <fieldset>
+		    <label for="eventInputField">"Hidden" Event Field Targeted by ID</label>
+			<input id="eventInputField" type="text" name="eventInputField" value="" />
+		    
+		    <label for="eventInputField2">"Hidden" Event Field Targeted by Name</label>
+			<input id="eventInputField2" type="text" name="eventInputField2" value="" />    
+		    </fieldset>
+		</form>
+	</div>
 	<script src="app.js"></script>
 </body>
 </html>

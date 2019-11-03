@@ -1,50 +1,28 @@
-function getAllUrlParams(url) {
-    var queryString = url ? url.split('?')[1] : window.location.search.slice(1);
-    var obj = {};
-  
-    if (queryString) {
-      queryString = queryString.split('#')[0];
-      var arr = queryString.split('&');
-  
-      for (var i = 0; i < arr.length; i++) {
-        var a = arr[i].split('=');
-        var paramName = a[0];
-        var paramValue = typeof (a[1]) === 'undefined' ? true : a[1];
-  
-        paramName = paramName.toLowerCase();
-        if (typeof paramValue === 'string') paramValue = paramValue.toLowerCase();
-  
-        if (paramName.match(/\[(\d+)?\]$/)) {
-          var key = paramName.replace(/\[(\d+)?\]/, '');
-          if (!obj[key]) obj[key] = [];
-  
-          if (paramName.match(/\[\d+\]$/)) {
-            var index = /\[(\d+)\]/.exec(paramName)[1];
-            obj[key][index] = paramValue;
-          } else {
-            obj[key].push(paramValue);
-          }
-        } else {
-          if (!obj[paramName]) {
-            obj[paramName] = paramValue;
-          } else if (obj[paramName] && typeof obj[paramName] === 'string'){
-            obj[paramName] = [obj[paramName]];
-            obj[paramName].push(paramValue);
-          } else {
-            obj[paramName].push(paramValue);
-          }
-        }
-      }
-    }
-  
-    return obj;
+$( document ).ready(function() {
+
+
+// Get the URL & Params, Break them Down
+function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,    
+    function(m,key,value) {
+      vars[key] = value;
+    });
+    return vars;
   }
+
+// Get just the event param
+var eventID_ENC = getUrlVars()["event"];
+
+// Decode the URI to Plaintext Chars
+var eventID = decodeURI(eventID_ENC);
+
+// Write it to the Form Field (js only)
+document.getElementById('eventInputField').value = eventID;
+
+// Write it to the Form Field (jquery targeted by name) 
+$("input[type='text'][name=eventInputField2]").val(eventID);
   
-  var params = document.getElementById('params');
-  var results = document.getElementById('results');
   
-  document.querySelector('input').addEventListener('keyup', function() {
-    params.innerText = this.value;
-    results.innerText = JSON.stringify(getAllUrlParams("http://test.com/?" + this.value), null, 2);
-  });
   
+  }); //END DOCREADY
