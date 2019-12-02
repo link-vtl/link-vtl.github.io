@@ -19,12 +19,12 @@ var SID = decodeURI(SID_ENC);
 
 if(SID == "undefined") {
 	$('label[for=siteID], input#siteID').hide();
-	var GoTo = "https://www.youtube.com/watch?v="+FID;
+	var GoTo = "https://"+FID;
 }
 
 if(FID == "undefined") {
 	$('label[for=flashID], input#flashID').hide();
-	var GoTo = "https://www.youtube.com/watch?v="+SID;
+	var GoTo = "https://webpages.uidaho.edu/vtd-ps/CC/flash/"+SID+".png";
 } 
 
 // Write it to the Form Field (js only)
